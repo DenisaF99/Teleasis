@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7ba2ff"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teleasis"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        tools:ignore="RtlCompat"
+        android:drawableTop="@drawable/logo"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_signin"
+        android:orientation="vertical"
+        android:padding="20dp"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="263dp"
+                    android:layout_height="65dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Autentificare"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    />
+
+
+                <EditText
+                    android:id="@+id/mailTxt"
+                    android:layout_width="338dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="20dp"
+                    android:ems="10"
+                    android:hint="  Email"
+                    android:inputType="textEmailAddress"
+                    />
+
+                <EditText
+                    android:id="@+id/passwordTxt"
+                    android:layout_width="338dp"
+                    android:layout_height="48dp"
+                    android:hint="  Parola"
+                    android:layout_marginBottom="20dp"
+                    android:inputType="textPassword"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    >
+
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/logInBtn"
+                    android:layout_width="240dp"
+                    android:layout_height="60dp"
+
+                    android:shadowColor="#FFFFFF"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Autentificare"
+                    app:backgroundTint="#417aff"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/autentificare"
+                    />
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

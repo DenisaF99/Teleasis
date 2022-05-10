@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "235698085180",
+    "firebase_url": "https://teleasisfirebase-default-rtdb.firebaseio.com",
+    "project_id": "teleasisfirebase",
+    "storage_bucket": "teleasisfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235698085180:android:e22823631240d0ae705239",
+        "android_client_info": {
+          "package_name": "com.example.teleasis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235698085180-j783a25bvcg1lhu3kn7lktdio9n3ielf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNnKxeabtBC5_tOWREAKilAbGBu0--QZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235698085180-j783a25bvcg1lhu3kn7lktdio9n3ielf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
