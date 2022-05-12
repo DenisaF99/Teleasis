@@ -12,12 +12,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bine Ati Venit!"
+        android:text="Preluare Temperatura"
         android:textSize="40dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,45 +37,26 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="100dp">
-
-                <Button
-                    android:id="@+id/CitireBtn"
-                    android:layout_width="300dp"
-                    android:layout_height="70dp"
-                    android:background="@drawable/oval_btn"
-                    android:shadowColor="#FFFFFF"
-                    android:drawableLeft="@drawable/medical_history_svgrepo_com"
-                    android:layout_marginBottom="20dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="Citire date"
-                    app:backgroundTint="#417aff"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     />
                 <Button
-                    android:id="@+id/VizualizareBtn"
+                    android:id="@+id/addTempPacientBtn"
                     android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:background="@drawable/oval_btn"
-                    android:drawableLeft="@drawable/preview_svgrepo_com"
                     android:shadowColor="#FFFFFF"
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Vizualizare date"
+                    android:text="Adauga date"
                     app:backgroundTint="#417aff"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     />
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/autentificare"
-                    android:paddingTop="40dp"
-                    />
+
             </LinearLayout>
 
         </ScrollView>

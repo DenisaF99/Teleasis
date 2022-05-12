@@ -1,25 +1,24 @@
 package com.example.teleasis;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class PrimaPagina_Pacient extends AppCompatActivity {
-    Button citireBtn;
+public class CitireDate extends AppCompatActivity {
+    Button pulsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prima_pagina);
-        citireBtn=findViewById(R.id.CitireBtn);
+        setContentView(R.layout.activity_citire_date);
+        pulsBtn = findViewById(R.id.pulsBtn);
 
-        citireBtn.setOnClickListener(new View.OnClickListener() {
+        pulsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(PrimaPagina_Pacient.this, CitireDate.class);
+                Intent myIntent = new Intent(CitireDate.this, Grafic.class);
                 startActivity(myIntent);
             }
         });

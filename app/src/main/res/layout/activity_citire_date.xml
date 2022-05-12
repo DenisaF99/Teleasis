@@ -12,12 +12,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bine Ati Venit!"
+        android:text="Citire Date"
         android:textSize="40dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="40dp"
         android:layout_gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,43 +39,61 @@
                 android:layout_marginTop="100dp">
 
                 <Button
-                    android:id="@+id/CitireBtn"
+                    android:id="@+id/connectBluetoothBtn"
                     android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:background="@drawable/oval_btn"
+                    android:drawableLeft="@drawable/bluetooth_svgrepo_com_1_"
                     android:shadowColor="#FFFFFF"
-                    android:drawableLeft="@drawable/medical_history_svgrepo_com"
-                    android:layout_marginBottom="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Citire date"
+                    android:text="Conectare Bluetooth"
                     app:backgroundTint="#417aff"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     />
                 <Button
-                    android:id="@+id/VizualizareBtn"
+                    android:id="@+id/pulsBtn"
                     android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:background="@drawable/oval_btn"
-                    android:drawableLeft="@drawable/preview_svgrepo_com"
+                    android:drawableLeft="@drawable/monitoring_graph_with_measurement_svgrepo_com"
                     android:shadowColor="#FFFFFF"
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Vizualizare date"
+                    android:text="Puls"
+                    app:backgroundTint="#417aff"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    />
+
+                <Button
+                    android:id="@+id/temperaturaBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/oval_btn"
+                    android:drawableLeft="@drawable/temperature_measure_svgrepo_com"
+                    android:shadowColor="#FFFFFF"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Temperatura"
                     app:backgroundTint="#417aff"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     />
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/autentificare"
-                    android:paddingTop="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/logo"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
                     />
+
             </LinearLayout>
 
         </ScrollView>
