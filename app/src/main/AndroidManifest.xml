@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teleasis">
         <activity
+            android:name=".Interventie"
+            android:exported="false" />
+        <activity
+            android:name=".RezolvareInterventii_ingrijitor"
+            android:exported="false" />
+        <activity
+            android:name=".IntroducereDate_ingrijitor"
+            android:exported="false" />
+        <activity
             android:name=".VizualizareDatePacient"
             android:exported="false" />
         <activity

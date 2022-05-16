@@ -3,25 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/add_svgrepo_com.xml" value="0.2495" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/autentificare.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/background_signin.xml" value="0.2355" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/bluetooth_svgrepo_com.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/bluetooth_svgrepo_com_1_.xml" value="0.2595" />
+        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/data_set_svgrepo_com.xml" value="0.2495" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/grafic.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/medical_history_svgrepo_com.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/monitoring_graph_with_measurement_svgrepo_com.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/oval_btn.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/preview_svgrepo_com.xml" value="0.2595" />
+        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/solution_svgrepo_com.xml" value="0.2495" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/temperature_measure_svgrepo_com.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_citire_date.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_grafic.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_grafic2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_interventie.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_introducere_date_ingrijitor.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_preluare_puls.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_preluare_temperatura.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_prima_pagina.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_prima_pagina_ingrijitor.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_rezolvare_interventii_ingrijitor.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_vizualizare_date_pacient.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/grafic.xml" value="0.25416666666666665" />
       </map>
