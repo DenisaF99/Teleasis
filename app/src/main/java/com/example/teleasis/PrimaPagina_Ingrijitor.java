@@ -15,7 +15,7 @@ public class PrimaPagina_Ingrijitor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prima_pagina_ingrijitor);
-        introducereBtn = findViewById(R.id.introducereDateIngrijitor);
+        introducereBtn = findViewById(R.id.IntroducereDateBtn);
         interventiiBtn = findViewById(R.id.RezInterventiiBtn);
 
         introducereBtn.setOnClickListener(new View.OnClickListener() {

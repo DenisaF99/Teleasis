@@ -73,13 +73,42 @@
                     android:layout_marginBottom="20dp"
                     android:inputType="textPassword"
                     />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Choose a filter: "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     >
+                    <RelativeLayout
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/filter_style"
+                        android:layout_width="0dp"
+                        tools:ignore="RtlCompat">
 
+                        <Spinner
+                            android:id="@+id/spinnerfilter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:backgroundTint="#417aff"
+                            android:dropDownWidth="150dp"
+                            android:overlapAnchor="false"
+                            android:popupBackground="#417aff" />
+                    </RelativeLayout>
 
 
                 </LinearLayout>

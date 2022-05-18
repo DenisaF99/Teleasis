@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Teleasis</string>
+    <string-array name="spinnerfilter">
+        <item>pacient</item>
+        <item>ingrijitor</item>
+    </string-array>
 </resources>

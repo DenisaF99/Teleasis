@@ -42,6 +42,8 @@
                     android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:drawableLeft="@drawable/add_svgrepo_com"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:shadowColor="#FFFFFF"
                     android:layout_marginBottom="20dp"
                     android:layout_gravity="center"
@@ -51,12 +53,15 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:background="@drawable/oval_btn"
                     />
                 <Button
                     android:id="@+id/RezInterventiiBtn"
                     android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:drawableLeft="@drawable/solution_svgrepo_com"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:shadowColor="#FFFFFF"
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center"
@@ -66,6 +71,13 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:background="@drawable/oval_btn"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/autentificare"
+                    android:paddingTop="40dp"
                     />
 
             </LinearLayout>

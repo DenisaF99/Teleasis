@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +23,23 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login extends AppCompatActivity {
     private Button logIn;
     EditText mailEditTxt, passwordEditTxt;
+    Spinner spinnerLogin;
     FirebaseAuth fAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         logIn = findViewById(R.id.logInBtn);
         mailEditTxt = findViewById(R.id.mailTxt);
         passwordEditTxt = findViewById(R.id.passwordTxt);
+        spinnerLogin = findViewById(R.id.spinnerfilter);
         fAuth= FirebaseAuth.getInstance();
+
+
+        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spinnerfilter, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        spinnerLogin.setAdapter(adapter);
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +48,7 @@ public class Login extends AppCompatActivity {
 //                startActivity(myIntent);
                 String mail= mailEditTxt.getText().toString().trim();
                 String parolaLogIn = passwordEditTxt.getText().toString().trim();
-
+                String item = spinnerLogin.getSelectedItem().toString();
 
 
                 if(TextUtils.isEmpty(mail)){
@@ -49,16 +60,26 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
+
+
                 fAuth.signInWithEmailAndPassword(mail,parolaLogIn).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(Login.this,"User created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), PrimaPagina_Pacient.class));
+                            if(item.equals("pacient")){
+                                Intent myIntent = new Intent(Login.this, PrimaPagina_Pacient.class);
+                                startActivity(myIntent);
+                            }else if(item.equals("ingrijitor")){
+                                Intent myIntent = new Intent(Login.this, PrimaPagina_Ingrijitor.class);
+                                startActivity(myIntent);
+                            }
+                            //Toast.makeText(Login.this,"User created", Toast.LENGTH_SHORT).show();
+
                         }else
                         {
                             Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
             }
