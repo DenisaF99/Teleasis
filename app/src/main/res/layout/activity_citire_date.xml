@@ -73,6 +73,8 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:enabled="false"
+
                     />
 
                 <Button
@@ -92,17 +94,13 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:enabled="false"
                     />
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/autentificare"
-                    android:layout_marginTop="10dp"
-                    />
+
                 <ListView
                     android:id="@+id/lista_bluetooth"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="191dp"
 
                     android:layout_above="@+id/background_masurare"
                     android:layout_below="@+id/lin"
@@ -110,12 +108,18 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="1dp"
-                    android:visibility="gone"
                     android:layout_marginEnd="0dp"
                     android:layout_marginBottom="0dp"
                     android:cacheColorHint="#FFFFFF">
 
                 </ListView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/autentificare"
+                    android:layout_marginTop="10dp"
+                    />
+
 
 
 

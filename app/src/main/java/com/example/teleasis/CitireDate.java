@@ -72,6 +72,31 @@ public class CitireDate extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lista_bluetooth);
         IntentFilter filter = new IntentFilter();
 
+        filter.addAction(BluetoothDevice.ACTION_FOUND);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+
+        registerReceiver(mReceiver, filter);
+        if (savedInstanceState != null) {
+            ArrayList<BluetoothDevice> list = savedInstanceState.getParcelableArrayList(DEVICE_LIST);
+            if (list != null) {
+                initList(list);
+                MyAdapter adapter = (MyAdapter) listView.getAdapter();
+                int selectedIndex = savedInstanceState.getInt(DEVICE_LIST_SELECTED);
+                if (selectedIndex != -1) {
+                    adapter.setSelectedIndex(selectedIndex);
+                    tempBtn.setEnabled(true);
+                    pulsBtn.setEnabled(true);
+                }
+            } else {
+                initList(new ArrayList<BluetoothDevice>());
+            }
+
+        } else {
+            initList(new ArrayList<BluetoothDevice>());
+        }
+
+
         connectBluetooth.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
             @Override
@@ -99,7 +124,12 @@ public class CitireDate extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(CitireDate.this, PreluarePuls.class);
+                BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
+                myIntent.putExtra(DEVICE_EXTRA, device);
+                myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
+                myIntent.putExtra(BUFFER_SIZE, mBufferSize);
                 startActivity(myIntent);
+
             }
         });
 
@@ -107,6 +137,10 @@ public class CitireDate extends AppCompatActivity {
            @Override
            public void onClick(View view) {
                Intent myIntent = new Intent(CitireDate.this, PreluareTemperatura.class);
+               BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
+               myIntent.putExtra(DEVICE_EXTRA, device);
+               myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
+               myIntent.putExtra(BUFFER_SIZE, mBufferSize);
                startActivity(myIntent);
            }
        });
@@ -129,7 +163,8 @@ public class CitireDate extends AppCompatActivity {
                 MyAdapter adapter = (MyAdapter) listView.getAdapter();
                 adapter.replaceItems(listDevices);
                 for (int i = 0; i < listDevices.size(); i++) {
-                    if (adapter.getItem(i).getAddress().equals("98:D3:11:FC:61:08")) {
+
+                    if (adapter.getItem(i).getAddress().equals("98:D3:31:F6:25:44")) {
                         unregisterReceiver(mReceiver);
                         adapter.setSelectedIndex(i);
                         tempBtn.setEnabled(true);
@@ -239,7 +274,7 @@ public class CitireDate extends AppCompatActivity {
                 MyAdapter adapter = (MyAdapter) listView.getAdapter();
                 adapter.replaceItems(listDevices);
                 for (int i=0;i<adapter.getCount();i++){
-                    if(adapter.getItem(i).getAddress().equals("98:D3:11:FC:61:08")){
+                    if(adapter.getItem(i).getAddress().equals("98:D3:31:F6:25:44")){
                         unregisterReceiver(mReceiver);
                         adapter.setSelectedIndex(i);
                         tempBtn.setEnabled(true);
