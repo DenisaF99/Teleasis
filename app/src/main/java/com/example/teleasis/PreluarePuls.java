@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -82,9 +83,9 @@ public class PreluarePuls extends AppCompatActivity {
         series = new LineGraphSeries<>();
         series.setDrawDataPoints(true);
         series.setDataPointsRadius(10);
-        series.setColor(Color.parseColor("#ffffff"));
+        series.setColor(Color.parseColor("#000000"));
         graph.addSeries(series);
-        graph.setBackgroundColor(Color.WHITE);
+        graph.setBackgroundColor(Color.BLACK);
         GridLabelRenderer glr = graph.getGridLabelRenderer();
         glr.setPadding(32);
         graph.getViewport().setXAxisBoundsManual(true);
@@ -92,15 +93,16 @@ public class PreluarePuls extends AppCompatActivity {
         graph.getViewport().setMaxX(7);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(50);
-        graph.getViewport().setMaxY(140);
+        graph.getViewport().setMaxY(300);
         graph.getViewport().setScrollable(true);
         graph.getGridLabelRenderer().setNumHorizontalLabels(7);
         graph.getGridLabelRenderer().setNumVerticalLabels(14);
-        graph.setBackgroundColor(Color.parseColor("#00000000"));
-        graph.getGridLabelRenderer().setGridColor(Color.parseColor("#ffffff"));
-        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#ffffff"));
-        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#ffffff"));
+        graph.setBackgroundColor(Color.parseColor("#ffffff"));
+        graph.getGridLabelRenderer().setGridColor(Color.parseColor("#000000"));
+        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#000000"));
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#000000"));
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+
 
         buttonbd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +114,8 @@ public class PreluarePuls extends AppCompatActivity {
                 bdpuls.setValue(String.valueOf(puls_final));
                 bdpuls.setData(date);
                 bdpuls.setId(id);
-
-                reff.child(userId).child("Puls").child(String.valueOf(id)).setValue(bdpuls);
+                Log.d("userID", userId);
+                reff.child("Conturi").child("Pacienti").child(userId).child("ValoriPuls").child(String.valueOf(id)).setValue(bdpuls);
 
                 Toast.makeText(PreluarePuls.this, "Data inserted successfully", Toast.LENGTH_LONG).show();
             }
@@ -187,8 +189,12 @@ public class PreluarePuls extends AppCompatActivity {
                             public void run() {
                                 int puls;
                                 if (despartit.length > 1) {
-                                    if (despartit[1].length() < 4) {
-                                        puls = Integer.parseInt(despartit[1].split("=")[1]);
+                                    if (despartit[0].length() > 0 && despartit[0].contains("P=")) {
+                                        puls = Integer.parseInt(despartit[0].split("=")[1]);
+                                        Log.d("string_puls", String.valueOf(despartit[0]));
+                                        textViewPuls.setText("Pulsul dumneavoastra este: " + puls);
+                                        puls_final = puls;
+                                        series.appendData(new DataPoint(coordonataX++, puls), true, 10);
 
                                         if (puls > 50 && puls < 60) {
                                             contor5060++;
@@ -288,12 +294,10 @@ public class PreluarePuls extends AppCompatActivity {
                         });
 
                     }
-                    Thread.sleep(600);
 
+                Thread.sleep(600);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -386,21 +390,13 @@ public class PreluarePuls extends AppCompatActivity {
 
         }
 
+        @SuppressLint("MissingPermission")
         @Override
         protected Void doInBackground(Void... devices) {
 
             try {
                 if (mBTSocket == null || !mIsBluetoothConnected) {
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return null;
-                    }
+                   Log.d("mDeviceUUID", String.valueOf(mDeviceUUID));
                     mBTSocket = mDevice.createInsecureRfcommSocketToServiceRecord(mDeviceUUID);
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                     mBTSocket.connect();
