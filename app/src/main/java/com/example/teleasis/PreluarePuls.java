@@ -295,7 +295,7 @@ public class PreluarePuls extends AppCompatActivity {
 
                     }
 
-                Thread.sleep(600);
+                    Thread.sleep(600);
                 }
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
@@ -396,7 +396,7 @@ public class PreluarePuls extends AppCompatActivity {
 
             try {
                 if (mBTSocket == null || !mIsBluetoothConnected) {
-                   Log.d("mDeviceUUID", String.valueOf(mDeviceUUID));
+                    Log.d("mDeviceUUID", String.valueOf(mDeviceUUID));
                     mBTSocket = mDevice.createInsecureRfcommSocketToServiceRecord(mDeviceUUID);
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                     mBTSocket.connect();
@@ -455,4 +455,3 @@ public class PreluarePuls extends AppCompatActivity {
 
 
 }
-

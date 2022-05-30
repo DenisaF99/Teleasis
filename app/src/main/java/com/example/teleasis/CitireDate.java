@@ -64,7 +64,7 @@ public class CitireDate extends AppCompatActivity {
 
         setContentView(R.layout.activity_citire_date);
         pulsBtn = findViewById(R.id.pulsBtn);
-        connectBluetooth =  findViewById(R.id.connectBluetoothBtn);
+        connectBluetooth = findViewById(R.id.connectBluetoothBtn);
         tempBtn = findViewById(R.id.temperaturaBtn);
         /*FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference mDatabase;
@@ -102,22 +102,21 @@ public class CitireDate extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
 
-                    mBTAdapter = BluetoothAdapter.getDefaultAdapter();
+                mBTAdapter = BluetoothAdapter.getDefaultAdapter();
 
-                    if (mBTAdapter == null) {
-                        Toast.makeText(getApplicationContext(), "Bluetooth not found", Toast.LENGTH_SHORT).show();
-                    } else if (!mBTAdapter.isEnabled()) {
-                        Intent enableBT = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                       // startActivityForResult(enableBT, BT_ENABLE_REQUEST);
-                        startActivityForResult(enableBT, BT_ENABLE_REQUEST);
-                    } else {
+                if (mBTAdapter == null) {
+                    Toast.makeText(getApplicationContext(), "Bluetooth not found", Toast.LENGTH_SHORT).show();
+                } else if (!mBTAdapter.isEnabled()) {
+                    Intent enableBT = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    // startActivityForResult(enableBT, BT_ENABLE_REQUEST);
+                    startActivityForResult(enableBT, BT_ENABLE_REQUEST);
+                } else {
 
-                        mBTAdapter.startDiscovery();
+                    mBTAdapter.startDiscovery();
 
-                    }
+                }
             }
         });
-
 
 
         pulsBtn.setOnClickListener(new View.OnClickListener() {
@@ -133,29 +132,30 @@ public class CitireDate extends AppCompatActivity {
             }
         });
 
-       tempBtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Intent myIntent = new Intent(CitireDate.this, PreluareTemperatura.class);
-               BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
-               myIntent.putExtra(DEVICE_EXTRA, device);
-               myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
-               myIntent.putExtra(BUFFER_SIZE, mBufferSize);
-               startActivity(myIntent);
-           }
-       });
+        tempBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(CitireDate.this, PreluareTemperatura.class);
+                BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
+                myIntent.putExtra(DEVICE_EXTRA, device);
+                myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
+                myIntent.putExtra(BUFFER_SIZE, mBufferSize);
+                startActivity(myIntent);
+            }
+        });
 
 
     }
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             boolean found = false;
             String action = intent.getAction();
             List<BluetoothDevice> listDevices = new ArrayList<BluetoothDevice>();
-            if(BluetoothDevice.ACTION_FOUND.equals(action)){
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(device!=null)
+                if (device != null)
                     listDevices.add(device);
             }
 
@@ -183,7 +183,7 @@ public class CitireDate extends AppCompatActivity {
 //                        msg("Device-ul nu a fost gasit!");
 //                    }
                 }
-                if(!found){
+                if (!found) {
                     msg("Device-ul nu a fost gasit!");
                 }
 
@@ -196,12 +196,12 @@ public class CitireDate extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
         MainActivity.closeDrawer(drawerLayout);
-
     }*/
     @Override
     protected void onStop() {
         super.onStop();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -273,19 +273,19 @@ public class CitireDate extends AppCompatActivity {
             if (listDevices.size() > 0) {
                 MyAdapter adapter = (MyAdapter) listView.getAdapter();
                 adapter.replaceItems(listDevices);
-                for (int i=0;i<adapter.getCount();i++){
-                    if(adapter.getItem(i).getAddress().equals("98:D3:31:F6:25:44")){
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    if (adapter.getItem(i).getAddress().equals("98:D3:31:F6:25:44")) {
                         unregisterReceiver(mReceiver);
                         adapter.setSelectedIndex(i);
                         tempBtn.setEnabled(true);
                         pulsBtn.setEnabled(true);
-                        tempBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.frame_btn_masurare));
-                        pulsBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.frame_btn_masurare));
+                        tempBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.frame_btn_masurare));
+                        pulsBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.frame_btn_masurare));
                         tempBtn.setTextColor(getResources().getColor(R.color.white));
                         pulsBtn.setTextColor(getResources().getColor(R.color.white));
-                        tempBtn.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getApplicationContext(),R.drawable.btn_temp),null,null,null);
-                        pulsBtn.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getApplicationContext(),R.drawable.btn_puls),null,null,null);
-                        Toast.makeText(getApplicationContext(), "Conectat!",Toast.LENGTH_LONG).show();
+                        tempBtn.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_temp), null, null, null);
+                        pulsBtn.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_puls), null, null, null);
+                        Toast.makeText(getApplicationContext(), "Conectat!", Toast.LENGTH_LONG).show();
                         found = true;
                     }
 
@@ -294,7 +294,7 @@ public class CitireDate extends AppCompatActivity {
 //
 //                    }
                 }
-                if(!found){
+                if (!found) {
                     msg("Device-ul nu a fost gasit!");
                 }
 
@@ -384,7 +384,6 @@ public class CitireDate extends AppCompatActivity {
         }
 
 
-
     }
 
     @Override
@@ -398,8 +397,6 @@ public class CitireDate extends AppCompatActivity {
         super.onDestroy();
         unregisterReceiver(mReceiver);
     }
-
-
 
 
 }
