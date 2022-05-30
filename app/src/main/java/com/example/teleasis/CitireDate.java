@@ -29,9 +29,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -66,9 +63,6 @@ public class CitireDate extends AppCompatActivity {
         pulsBtn = findViewById(R.id.pulsBtn);
         connectBluetooth = findViewById(R.id.connectBluetoothBtn);
         tempBtn = findViewById(R.id.temperaturaBtn);
-        /*FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference mDatabase;
-        mDatabase = FirebaseDatabase.getInstance().getReference(); */
         listView = (ListView) findViewById(R.id.lista_bluetooth);
         IntentFilter filter = new IntentFilter();
 
@@ -135,7 +129,7 @@ public class CitireDate extends AppCompatActivity {
         tempBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(CitireDate.this, PreluareTemperatura.class);
+                Intent myIntent = new Intent(CitireDate.this, PreluareValoriMediu.class);
                 BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
                 myIntent.putExtra(DEVICE_EXTRA, device);
                 myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());

@@ -33,7 +33,7 @@
             android:name=".Grafic"
             android:exported="false" />
         <activity
-            android:name=".PreluareTemperatura"
+            android:name=".PreluareValoriMediu"
             android:exported="false" />
         <activity
             android:name=".PreluarePuls"
