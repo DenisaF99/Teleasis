@@ -39,7 +39,6 @@ public class CitireDate extends AppCompatActivity {
     Button connectBluetooth;
     Button tempBtn;
     DrawerLayout drawerLayout;
-
     private ListView listView;
     private BluetoothAdapter mBTAdapter;
     private static final int BT_ENABLE_REQUEST = 10;
