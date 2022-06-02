@@ -71,9 +71,13 @@ public class PreluarePuls extends AppCompatActivity {
         String userId = currentUser.getUid();
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        if (b == null){
+            Log.d("Err", "null");
+        }
+        else{
         mDevice = b.getParcelable(CitireDate.DEVICE_EXTRA);
         mDeviceUUID = UUID.fromString(b.getString(CitireDate.DEVICE_UUID));
-        mMaxChars = b.getInt(CitireDate.BUFFER_SIZE);
+        mMaxChars = b.getInt(CitireDate.BUFFER_SIZE); }
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_PAIRING_REQUEST);
         registerReceiver(mPairingRequestReceiver, filter);
         buttonbd = (Button) findViewById(R.id.addPulsBtnPacientBtn);
@@ -431,13 +435,13 @@ public class PreluarePuls extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
+  /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
 
-            startActivity(new Intent(getApplicationContext(), PreluarePuls.class));
+            startActivity(new Intent(getApplicationContext(),CitireDate.class));
 
             finish();
         }
@@ -446,12 +450,12 @@ public class PreluarePuls extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        startActivity(new Intent(getApplicationContext(), PreluarePuls.class));
+        Log.d("exit","back");
+        startActivity(new Intent(getApplicationContext(), CitireDate.class));
         finish();
 
 
     }
-
+*/
 
 }

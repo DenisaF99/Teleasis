@@ -51,9 +51,11 @@ public class CitireDate extends AppCompatActivity {
     private static final String DEVICE_LIST_SELECTED = "com.example.teleasis.devicelistselected";
     public static final String BUFFER_SIZE = "com.example.teleasis.buffersize";
     private static final String TAG = "BlueTest5-MainActivity";
+    public static boolean foundConn=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("back:", "back");
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -64,6 +66,8 @@ public class CitireDate extends AppCompatActivity {
         tempBtn = findViewById(R.id.temperaturaBtn);
         listView = (ListView) findViewById(R.id.lista_bluetooth);
         IntentFilter filter = new IntentFilter();
+
+        Log.d("FoundVal:", String.valueOf(foundConn));
 
         filter.addAction(BluetoothDevice.ACTION_FOUND);
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
@@ -116,7 +120,9 @@ public class CitireDate extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(CitireDate.this, PreluarePuls.class);
-                BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
+                //BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
+                BluetoothDevice  device= mBTAdapter.getRemoteDevice("98:D3:31:F6:25:44");
+                Log.d("Lista", String.valueOf(device));
                 myIntent.putExtra(DEVICE_EXTRA, device);
                 myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
                 myIntent.putExtra(BUFFER_SIZE, mBufferSize);
@@ -143,7 +149,7 @@ public class CitireDate extends AppCompatActivity {
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            boolean found = false;
+           // boolean found = false;
             String action = intent.getAction();
             List<BluetoothDevice> listDevices = new ArrayList<BluetoothDevice>();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
@@ -169,14 +175,14 @@ public class CitireDate extends AppCompatActivity {
                         tempBtn.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_temp), null, null, null);
                         pulsBtn.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_puls), null, null, null);
                         Toast.makeText(getApplicationContext(), "Conectat!", Toast.LENGTH_LONG).show();
-                        found = true;
+                        foundConn = true;
                     }
 
 //                    } else {
 //                        msg("Device-ul nu a fost gasit!");
 //                    }
                 }
-                if (!found) {
+                if (!foundConn) {
                     msg("Device-ul nu a fost gasit!");
                 }
 
@@ -379,7 +385,7 @@ public class CitireDate extends AppCompatActivity {
 
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
@@ -389,7 +395,7 @@ public class CitireDate extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
-    }
+    } */
 
 
 }
