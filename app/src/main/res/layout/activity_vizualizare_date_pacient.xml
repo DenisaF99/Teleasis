@@ -35,139 +35,139 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <ScrollView
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/valoriPuls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Valori Puls" />
+
+                <Button
+                    android:id="@+id/valoriMediu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Valori Mediu" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPuls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Data" />
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Valoarea" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/vizualizarePuls"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="20dp"
-                                android:visibility="visible"
-                                android:layout_gravity="center_vertical"
-                                android:text="Puls"
-                                android:layout_marginLeft="10dp"
-                                />
-
-
-                            <TextView
-                                android:id="@+id/vizualizareTemp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="20dp"
-                                android:visibility="visible"
-                                android:layout_gravity="center_vertical"
-                                android:text="Temperatura"
-                                />
-
-                            <TextView
-                                android:id="@+id/vizualizareUmiditate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="20dp"
-                                android:visibility="visible"
-                                android:layout_gravity="center_vertical"
-                                android:text="Umiditate"
-                                />
-
-                            <TextView
-                                android:id="@+id/vizualizareGaz"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="20dp"
-                                android:visibility="visible"
-                                android:layout_gravity="center_vertical"
-                                android:text="Gaz"
-                                />
-
-                            <TextView
-                                android:id="@+id/vizualizarePrezenta"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="20dp"
-                                android:visibility="visible"
-                                android:layout_gravity="center_vertical"
-                                android:text="Prezenta"
-                                />
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/tv_data"
-                            android:textColor="#fff"
-
-                            android:textSize="18sp"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:layout_height="wrap_content"
-                            android:text="Data" />
-
-                        <TextView
-                            android:id="@+id/tv_valoare"
-
-
-                            android:textSize="18sp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Valoare"
-                            android:textColor="#fff" />
-
-                    </LinearLayout>
                 </LinearLayout>
-            </ScrollView>
+
+                <ListView
+                    android:id="@+id/listValoriPuls"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMediu"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Data" />
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Gaz" />
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Temperatura" />
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Umiditate" />
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Prezenta" />
+                </LinearLayout>
+                <ListView
+                    android:id="@+id/listValoriMediu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                     />
+
+            </LinearLayout>
 
         </LinearLayout>
 
 
 
     </LinearLayout>
-    <ListView
-        android:id="@+id/listaAfisare"
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="160dp">
-
-    </ListView>
-    <ImageView
+    <TextView
         android:id="@+id/no_data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Nu exista date"
        />
 
 

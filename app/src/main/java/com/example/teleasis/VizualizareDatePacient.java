@@ -1,21 +1,26 @@
 package com.example.teleasis;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.room.jarjarred.org.stringtemplate.v4.Interpreter;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,200 +30,196 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class VizualizareDatePacient extends AppCompatActivity {
-
-
-    DrawerLayout drawerLayout;
-    String nume_extras;
-    ImageView no_data;
-    ImageView poza_meniu;
-    LinearLayout currentLayout;
-    ListView listView;
-    DatabaseReference ref;
-    TextView pulsTxt,tempTxt,umiditateTxt,gazTxt,prezentaTxt;
+    Button valoriPuls, valoriMediu;
+    ListView listValoriPuls, listValoriMediu;
+    TextView no_data;
     DatabaseReference reff;
-    Interpreter interpreter;
-
-
+    DatabaseReference reff2;
+    LinearLayout layoutPuls, layoutMediu;
     private FirebaseAuth mAuth;
+
     ArrayList<String> lista_puls = new ArrayList<String>();
-    ArrayList<String> puls = new ArrayList<>();
-    ArrayList<String> temperatura = new ArrayList<>();
-    ArrayList<String> umiditate = new ArrayList<>();
-    ArrayList<String> gaz = new ArrayList<>();
-    ArrayList<String> prezenta = new ArrayList<>();
+    ArrayList<String> date = new ArrayList<>();
+    ArrayList<String> valori = new ArrayList<>();
+    ArrayList<String> iduri = new ArrayList<>();
+
+    ArrayList<String> lista_mediu = new ArrayList<String>();
+    ArrayList<String> date_mediu = new ArrayList<>();
+    ArrayList<String> valori_gaz = new ArrayList<>();
+    ArrayList<String> valori_temperatura = new ArrayList<>();
+    ArrayList<String> valori_prezenta = new ArrayList<>();
+    ArrayList<String> valori_umiditate = new ArrayList<>();
+    ArrayList<String> iduri_mediu = new ArrayList<>();
 
 
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_vizualizare_date_pacient);
 
-        try {
-            interpreter = new Interpreter(loadModelFile(),null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        listView = findViewById(R.id.listaAfisare);
+        valoriPuls = findViewById(R.id.valoriPuls);
+        valoriMediu = findViewById(R.id.valoriMediu);
+        listValoriPuls = findViewById(R.id.listValoriPuls);
+        listValoriMediu = findViewById(R.id.listValoriMediu);
+        layoutMediu = findViewById(R.id.linearLayoutMediu);
+        layoutPuls = findViewById(R.id.linearLayoutPuls);
         no_data = findViewById(R.id.no_data);
+
         mAuth = FirebaseAuth.getInstance();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         String userId = currentUser.getUid();
 
-        ref = FirebaseDatabase.getInstance().getReference().child(userId).child("Puls");
+        reff = FirebaseDatabase.getInstance().getReference().child("Conturi/Pacienti/").child(userId).child("/ValoriPuls");
+        reff2 = FirebaseDatabase.getInstance().getReference().child("Conturi/Pacienti/").child(userId).child("/ValoriMediu");
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        pulsTxt = findViewById(R.id.vizualizarePuls);
-        tempTxt = findViewById(R.id.vizualizareTemp);
-        umiditateTxt = findViewById(R.id.vizualizareUmiditate);
-        gazTxt = findViewById(R.id.vizualizareGaz);
-        prezentaTxt = findViewById(R.id.vizualizarePrezenta);
-
-//        DatabaseReference mDatabase;
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        ValueEventListener postListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                nume_extras = dataSnapshot.child(currentFirebaseUser.getUid()).child("Nume").getValue(String.class);
-//                Picasso.with(getApplication()).load(dataSnapshot.child(currentFirebaseUser.getUid()).child("Imagine").child("imageUrl").getValue(String.class)).into(poza_meniu);
-//                tv.setText(nume_extras);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) { }
-//        };
-
-//        mDatabase.addValueEventListener(postListener);
-    }
-
-    private MappedByteBuffer loadModelFile() throws  IOException{
-        AssetFileDescriptor assetFileDescriptor = this.getAssets().openFd("linear3.tflite");
-        FileInputStream fileInputStream = new FileInputStream(assetFileDescriptor.getFileDescriptor());
-        FileChannel fileChannel = fileInputStream.getChannel();
-        long startOffset = assetFileDescriptor.getStartOffset();
-        long length = assetFileDescriptor.getLength();
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY,startOffset,length);
-    }
-
-    public float doInference(String val){
-        float[] input = new float[1];
-        input[0] = Float.parseFloat(val);
-        float[][] output = new float[1][1];
-        interpreter.run(input,output);
-        return output[0][0];
-    }
-
-
-//    @Override
-//    protected void onPause(){
-//        super.onPause();
-//        MainActivity.closeDrawer(drawerLayout);
-//
-//    }
-//    @Override
-//    public void onBackPressed() {
-//
-//
-//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//        finish();
-//
-//
-//    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ref.addValueEventListener(new ValueEventListener() {
+        ValueEventListener roomsValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int i = 0;
                 int counter = 0;
-                int f = 0;
-                String puls_luat = "", temp_luat = "", umiditate_luata = "",  gaz_luat = "",  prezenta_luata = "";
+                String data_luata = "",valoare_luata= "";
 
                 for (DataSnapshot pulsuri : dataSnapshot.getChildren()) {
                     if (pulsuri != null) {
-                        for (DataSnapshot val : pulsuri.getChildren()) {
-                            if (val.getKey().equals("puls")) {
-                                puls_luat = val.getValue().toString();
+                        for ( DataSnapshot val : pulsuri.getChildren() ) {
+                            if(val.getKey().equals("data")){
+                                data_luata = val.getValue().toString();
                             }
-                            if (val.getKey().equals("temperatura")) {
-                                temp_luat = val.getValue().toString();
-                                f = (int) doInference(String.valueOf(temp_luat));
+                            if(val.getKey().equals("value")){
+                                valoare_luata = val.getValue().toString();
                             }
-                            if (val.getKey().equals("umiditate")) {
-                                umiditate_luata = val.getValue().toString();
-                                f = (int) doInference(String.valueOf(umiditate_luata));
-                            }
-                            if (val.getKey().equals("gaz")) {
-                                gaz_luat = val.getValue().toString();
-                                f = (int) doInference(String.valueOf(gaz_luat));
-                            }
-                            if (val.getKey().equals("prezenta")) {
-                                prezenta_luata = val.getValue().toString();
-                                f = (int) doInference(String.valueOf(prezenta_luata));
-                            }
-
-                            if (!puls_luat.equals("") && !valoare_luata.equals("")) {
-                                lista_puls.add(data_luata + "," + valoare_luata + "," + f);
+                            if(!data_luata.equals("") && !valoare_luata.equals("")){
+                                lista_puls.add(data_luata+","+valoare_luata + "," + pulsuri.getKey());
                                 counter++;
-                                data_luata = "";
-                                valoare_luata = "";
+                                data_luata="";
+                                valoare_luata="";
+
                             }
                         }
                     }
                 }
                 if (counter == 0) {
                     no_data.setVisibility(View.VISIBLE);
-                    listView.setVisibility(View.GONE);
-                    tv_data.setVisibility(View.GONE);
-                    tv_valoare.setVisibility(View.GONE);
-                    tv_prezicere.setVisibility(View.GONE);
-
                 }
                 Collections.sort(lista_puls);
-                for (String puls_curent : lista_puls) {
+                for (String puls_curent:lista_puls) {
                     String[] sp = puls_curent.split(",");
                     String valoare = sp[1];
                     String[] data = sp[0].split("-");
+                    String id = sp[2];
                     String an = data[2];
                     String luna = data[1];
                     String zi = data[0];
                     String data_invers = an + "-" + luna + "-" + zi;
-                    String ff = sp[2];
                     date.add(data_invers);
                     valori.add(valoare);
-                    preziceri.add(ff);
-                    i++;
-                    CustomAdapterAnalizare customAdapter = new CustomAdapterAnalizare(getApplicationContext(), valori, date, preziceri);
+                    iduri.add(id);
+                    CustomAdapterVizualizare customAdapter = new CustomAdapterVizualizare(getApplicationContext(), valori, date,iduri);
                     customAdapter.notifyDataSetChanged();
-                    listView.setAdapter(customAdapter);
+                    listValoriPuls.setAdapter(customAdapter);
                 }
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
+        };
+        reff.addListenerForSingleValueEvent(roomsValueEventListener);
+
+
+        ValueEventListener roomsValueEventListener2 = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int counter = 0;
+                String data_luata = "",valoare_gaz_luata= "",valoare_temperatura_luata= "",valoare_prezenta_luata= "",valoare_umiditate_luata= "";
+
+                for (DataSnapshot mediu : dataSnapshot.getChildren()) {
+                    if (mediu != null) {
+                        for ( DataSnapshot val : mediu.getChildren() ) {
+                            if(val.getKey().equals("data")){
+                                data_luata = val.getValue().toString();
+                            }
+                            if(val.getKey().equals("value_gaz")){
+                                valoare_gaz_luata = val.getValue().toString();
+                            }
+                            if(val.getKey().equals("value_temperatura")){
+                                valoare_temperatura_luata = val.getValue().toString();
+                            }
+                            if(val.getKey().equals("value_prezenta")){
+                                valoare_prezenta_luata = val.getValue().toString();
+                            }
+                            if(val.getKey().equals("value_umiditate")){
+                                valoare_umiditate_luata = val.getValue().toString();
+                            }
+                            if(!data_luata.equals("") && !valoare_gaz_luata.equals("")&& !valoare_temperatura_luata.equals("")&& !valoare_prezenta_luata.equals("")&& !valoare_umiditate_luata.equals("")){
+                                lista_mediu.add(data_luata+","+valoare_gaz_luata +","+valoare_temperatura_luata+","+valoare_prezenta_luata+","+valoare_umiditate_luata+ "," + mediu.getKey());
+                                counter++;
+                                data_luata="";
+                                valoare_gaz_luata="";
+                                valoare_temperatura_luata="";
+                                valoare_prezenta_luata="";
+                                valoare_umiditate_luata="";
+                            }
+                        }
+                    }
+                }
+                if (counter == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
+                Collections.sort(lista_mediu);
+                for (String mediu_curent:lista_mediu) {
+                    String[] sp = mediu_curent.split(",");
+                    String valoare_gaz = sp[1];
+                    String valoare_temperatura = sp[2];
+                    String valoare_prezenta = sp[3];
+                    String valoare_umiditate = sp[4];
+                    String[] data = sp[0].split("-");
+                    String id = sp[2];
+                    String an = data[2];
+                    String luna = data[1];
+                    String zi = data[0];
+                    String data_invers = an + "-" + luna + "-" + zi;
+                    date_mediu.add(data_invers);
+                    valori_gaz.add(valoare_gaz);
+                    valori_temperatura.add(valoare_temperatura);
+                    valori_umiditate.add(valoare_umiditate);
+                    valori_prezenta.add(valoare_prezenta);
+                    iduri_mediu.add(id);
+                    Log.d("caca", valoare_gaz);
+                    CustomAdapterVizualizareMediu customAdapter2 = new CustomAdapterVizualizareMediu(getApplicationContext(), valori_gaz,valori_temperatura,valori_umiditate,valori_prezenta, date,iduri);
+                    customAdapter2.notifyDataSetChanged();
+                    listValoriMediu.setAdapter(customAdapter2);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+        reff2.addListenerForSingleValueEvent(roomsValueEventListener2);
+
+
+
+        valoriPuls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutPuls.setVisibility(View.VISIBLE);
+                layoutMediu.setVisibility(View.INVISIBLE);
+            }
         });
+
+        valoriMediu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutPuls.setVisibility(View.INVISIBLE);
+                layoutMediu.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
 }
