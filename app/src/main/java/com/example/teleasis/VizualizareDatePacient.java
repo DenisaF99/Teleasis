@@ -191,7 +191,7 @@ public class VizualizareDatePacient extends AppCompatActivity {
                     valori_prezenta.add(valoare_prezenta);
                     iduri_mediu.add(id);
                     Log.d("caca", valoare_gaz);
-                    CustomAdapterVizualizareMediu customAdapter2 = new CustomAdapterVizualizareMediu(getApplicationContext(), valori_gaz,valori_temperatura,valori_umiditate,valori_prezenta, date,iduri);
+                    CustomAdapterVizualizareMediu customAdapter2 = new CustomAdapterVizualizareMediu(getApplicationContext(), valori_gaz,valori_temperatura,valori_umiditate,valori_prezenta, date_mediu,iduri_mediu);
                     customAdapter2.notifyDataSetChanged();
                     listValoriMediu.setAdapter(customAdapter2);
                 }
@@ -208,14 +208,14 @@ public class VizualizareDatePacient extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 layoutPuls.setVisibility(View.VISIBLE);
-                layoutMediu.setVisibility(View.INVISIBLE);
+                layoutMediu.setVisibility(View.GONE);
             }
         });
 
         valoriMediu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutPuls.setVisibility(View.INVISIBLE);
+                layoutPuls.setVisibility(View.GONE);
                 layoutMediu.setVisibility(View.VISIBLE);
             }
         });

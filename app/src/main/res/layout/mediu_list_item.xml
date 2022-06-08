@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/data"
             android:textColor="#000"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/valoare_gaz"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
             android:textColor="#000" />
         <TextView
             android:id="@+id/valoare_umiditate"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -61,7 +61,7 @@
             android:textColor="#000" />
         <TextView
             android:id="@+id/valoare_prezenta"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

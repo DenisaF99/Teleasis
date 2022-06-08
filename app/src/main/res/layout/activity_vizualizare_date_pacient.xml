@@ -60,6 +60,7 @@
             <LinearLayout
                 android:id="@+id/linearLayoutPuls"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -98,7 +99,6 @@
             <LinearLayout
                 android:id="@+id/linearLayoutMediu"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <LinearLayout
@@ -108,7 +108,7 @@
 
                     <TextView
                         android:textColor="#000"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -116,7 +116,7 @@
                         android:text="Data" />
                     <TextView
                         android:textColor="#000"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -132,7 +132,7 @@
                         android:text="Temperatura" />
                     <TextView
                         android:textColor="#000"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -140,20 +140,24 @@
                         android:text="Umiditate" />
                     <TextView
                         android:textColor="#000"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_height="wrap_content"
                         android:text="Prezenta" />
                 </LinearLayout>
+
                 <ListView
                     android:id="@+id/listValoriMediu"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                     />
+                    android:layout_height="match_parent">
+            </ListView>
 
-            </LinearLayout>
+
+        </LinearLayout>
+
+
 
         </LinearLayout>
 
