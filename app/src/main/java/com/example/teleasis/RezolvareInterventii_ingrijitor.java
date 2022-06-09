@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -35,8 +36,10 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
         ArrayList<String> lista_interventii = new ArrayList<String>();
         ArrayList<String> descrieri = new ArrayList<>();
         ArrayList<String> id_uri = new ArrayList<>();
-
-
+        ArrayList<String> stadii = new ArrayList<>();
+        ArrayList<String> tipuri = new ArrayList<>();
+        ArrayList<String> date_rezolvate = new ArrayList<>();
+        no_data = findViewById(R.id.no_data);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String userId = currentUser.getUid();
@@ -44,12 +47,11 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
 
 
         reff = FirebaseDatabase.getInstance().getReference().child("Conturi/Ingrijitori/").child(userId).child("/Interventii");
-
         ValueEventListener roomsValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
-                String descriere = "",id= "";
+                String descriere = "",id= "", stadiu="", tip="",data_rezolvata="";
 
                 for (DataSnapshot interventii : dataSnapshot.getChildren()) {
                     if (interventii != null) {
@@ -60,11 +62,24 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
                             if(val.getKey().equals("id_interventie")){
                                 id = val.getValue().toString();
                             }
-                            if(!descriere.equals("") && !id.equals("")){
-                                lista_interventii.add(descriere+","+id);
+                            if(val.getKey().equals("stadiu")){
+                                stadiu = val.getValue().toString();
+                            }
+                            if(val.getKey().equals("tip")){
+                                tip = val.getValue().toString();
+                            }
+                            if(val.getKey().equals("data_rezolvata")){
+                                data_rezolvata = val.getValue().toString();
+                            }
+                            if(!descriere.equals("") && !id.equals("") && !stadiu.equals("") && !tip.equals("")){
+                                lista_interventii.add(descriere+","+id+","+stadiu+","+tip+","+data_rezolvata);
+
                                 counter++;
                                 descriere="";
                                 id="";
+                                stadiu="";
+                                tip="";
+                                data_rezolvata="";
 
                             }
                         }
@@ -78,11 +93,21 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
                     String[] sp = interventie_curenta.split(",");
                     String descriere_int = sp[0];
                     String id_int = sp[1];
+                    String stadiu_int = sp[2];
+                    String tip_int = sp[3];
+                    if(sp.length==5)
+                    {
+                        String data_int = sp[4];
+                        date_rezolvate.add(data_int);
+
+                    }
 
                     descrieri.add(descriere_int);
                     id_uri.add(id_int);
+                    stadii.add(stadiu_int);
+                    tipuri.add(tip_int);
 
-                    AdapterListaInterventii customAdapter = new AdapterListaInterventii(descrieri, id_uri, getApplicationContext());
+                    AdapterListaInterventii customAdapter = new AdapterListaInterventii(descrieri, id_uri, stadii, tipuri, date_rezolvate, getApplicationContext());
                     customAdapter.notifyDataSetChanged();
                     listaInterventii.setAdapter(customAdapter);
                 }

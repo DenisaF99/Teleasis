@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/activity_citire_date.xml" value="0.10572916666666667" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/activity_interventie.xml" value="0.17604166666666668" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/activity_introducere_date_ingrijitor.xml" value="0.11302083333333333" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/activity_preluare_puls.xml" value="0.25416666666666665" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/activity_rezolvare_interventii_ingrijitor.xml" value="0.11302083333333333" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/activity_vizualizare_date_pacient.xml" value="0.25416666666666665" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/interventie_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/list_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/mediu_list_item.xml" value="0.253125" />
+        <entry key="..\:/Proiect Arduino/Teleasis/app/src/main/res/layout/puls_list_item.xml" value="0.253125" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/add_svgrepo_com.xml" value="0.2495" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/autentificare.xml" value="0.2595" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/drawable/background_signin.xml" value="0.2355" />
@@ -31,7 +41,6 @@
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_rezolvare_interventii_ingrijitor.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/activity_vizualizare_date_pacient.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/grafic.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Denisa Feher/AndroidStudioProjects/Teleasis/app/src/main/res/layout/interventie_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/SilviaB/Desktop/Teleasis/app/src/main/res/drawable/btn_puls.xml" value="0.236" />
         <entry key="..\:/Users/SilviaB/Desktop/Teleasis/app/src/main/res/drawable/btn_temp.xml" value="0.236" />
         <entry key="..\:/Users/SilviaB/Desktop/Teleasis/app/src/main/res/drawable/frame_btn_masurare.xml" value="0.236" />

@@ -26,16 +26,42 @@
         android:background="@drawable/background_signin"
         android:orientation="vertical"
         android:padding="20dp">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date despre interventie: "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="left"/>
+
+        <TextView
+            android:id="@+id/descriereId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descriere: "
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"/>
+        <TextView
+            android:id="@+id/stadiuId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stadiu: "
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"/>
+        <TextView
+            android:id="@+id/tipId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tip: "
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"/>
+
+
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -45,6 +71,7 @@
                    android:textColor="@color/black"
                    android:layout_gravity="left"/>
                 <EditText
+                    android:id="@+id/editTextId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
@@ -53,11 +80,7 @@
                     android:minLines="6"
                     android:scrollbars="vertical" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="40dp">
+
                     <Button
                         android:id="@+id/rezolvareInterventieBtn"
                         android:layout_width="300dp"
@@ -75,13 +98,9 @@
                         android:textSize="20dp"
                         />
 
-                </LinearLayout>
 
 
 
-            </LinearLayout>
-
-        </ScrollView>
 
     </LinearLayout>
 

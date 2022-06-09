@@ -12,15 +12,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class AdapterListaInterventii extends BaseAdapter implements ListAdapter {
-    private ArrayList<String> descrieri = new ArrayList<String>();
+public class AdapterListaInterventii extends BaseAdapter {
+    ArrayList<String> descrieri = new ArrayList<String>();
     ArrayList<String> id_uri = new ArrayList<>();
-    private Context context;
+    ArrayList<String> stadii = new ArrayList<>();
+    ArrayList<String> tipuri = new ArrayList<>();
+    ArrayList<String> date_rezolvate = new ArrayList<>();
+    Context context;
+    LayoutInflater inflter;
 
-    public AdapterListaInterventii(ArrayList<String> descrieri,ArrayList<String> id_uri, Context context) {
+    public AdapterListaInterventii(ArrayList<String> descrieri,ArrayList<String> id_uri, ArrayList<String> stadii, ArrayList<String> tipuri, ArrayList<String> date_rezolvate, Context context) {
         this.descrieri = descrieri;
         this.id_uri=id_uri;
+        this.stadii=stadii;
+        this.tipuri=tipuri;
+        this.date_rezolvate=date_rezolvate;
         this.context = context;
+        inflter = (LayoutInflater.from(context));
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -40,12 +49,10 @@ public class AdapterListaInterventii extends BaseAdapter implements ListAdapter 
 
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.activity_rezolvare_interventii_ingrijitor, null);
-        }
+    public View getView( int position, View view, ViewGroup parent) {
+        this.notifyDataSetChanged();
+        view = inflter.inflate(R.layout.interventie_layout, null);
+
 
         //Handle TextView and display string from your list
         TextView tvContact= (TextView)view.findViewById(R.id.interventieTxt);
@@ -53,11 +60,28 @@ public class AdapterListaInterventii extends BaseAdapter implements ListAdapter 
 
         //Handle buttons and add onClickListeners
         Button callbtn= (Button)view.findViewById(R.id.rezolvaInterventieBtn);
+        TextView rezolvatId = (TextView) view.findViewById(R.id.rezolvatId);
 
+        if(stadii.get(position).equals("Necompletat"))
+        {
+            callbtn.setVisibility(View.VISIBLE);
+            rezolvatId.setVisibility(View.GONE);
+        }
+        else
+        {
+            callbtn.setVisibility(View.GONE);
+            rezolvatId.setVisibility(View.VISIBLE);
+            rezolvatId.setText(rezolvatId.getText()+date_rezolvate.get(position));
+        }
         callbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(v.getContext(), Interventie.class);
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                myIntent.putExtra("stadiu", stadii.get(position));
+                myIntent.putExtra("tip",  tipuri.get(position));
+                myIntent.putExtra("descriere",  descrieri.get(position));
+                myIntent.putExtra("idInterventie",  id_uri.get(position));
                 context.startActivity(myIntent);
 
             }

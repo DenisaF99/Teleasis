@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
+    android:layout_marginBottom="10dp"
     android:background="@color/white"
     android:orientation="horizontal">
 
@@ -11,22 +12,31 @@
         android:id="@+id/interventieTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
         android:text="Interventie 1"
-        android:textSize="30dp"
+        android:textSize="18dp"
         android:paddingRight="40dp"/>
     <Button
         android:id="@+id/rezolvaInterventieBtn"
         android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/oval_btn"
         android:shadowColor="#FFFFFF"
         android:layout_gravity="right"
         android:gravity="center"
-        android:text="Rezolvare interventie"
-        app:backgroundTint="#417aff"
+        android:text="Rezolvare"
+        android:backgroundTint="#417aff"
         android:textStyle="bold"
         android:textColor="@color/white"
+        android:textSize="18dp"
+        />
+    <TextView
+        android:id="@+id/rezolvatId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:visibility="gone"
+        android:text="Rezolvat la data de: "
         android:textSize="18dp"
         />
 
