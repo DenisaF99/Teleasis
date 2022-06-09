@@ -37,20 +37,59 @@
                 android:orientation="vertical"
                 android:layout_marginTop="100dp">
                 <Button
-                    android:id="@+id/introducereDateIngrijitor"
+                    android:id="@+id/connectBluetoothBtn"
                     android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:background="@drawable/oval_btn"
+                    android:drawableLeft="@drawable/bluetooth_svgrepo_com_1_"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
                     android:shadowColor="#FFFFFF"
-                    android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Adauga date"
+                    android:text="Conectare Bluetooth"
                     app:backgroundTint="#417aff"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     />
+                <Button
+                    android:id="@+id/pulsBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/oval_btn"
+                    android:drawableLeft="@drawable/monitoring_graph_with_measurement_svgrepo_com"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="100dp"
+                    android:shadowColor="#FFFFFF"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Puls"
+                    app:backgroundTint="#417aff"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:enabled="false"
+
+                    />
+
+                <ListView
+                    android:id="@+id/lista_bluetooth"
+                    android:layout_width="match_parent"
+                    android:layout_height="191dp"
+
+                    android:layout_above="@+id/background_masurare"
+                    android:layout_below="@+id/lin"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:cacheColorHint="#FFFFFF">
+
+                </ListView>
 
             </LinearLayout>
 
