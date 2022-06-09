@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".Login">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Interventie"
@@ -39,11 +39,43 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Date informative:"
+                   android:text="Observatii despre interventie: "
                    android:textSize="20dp"
                    android:textStyle="bold"
                    android:textColor="@color/black"
                    android:layout_gravity="left"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="40dp">
+                    <Button
+                        android:id="@+id/rezolvareInterventieBtn"
+                        android:layout_width="300dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/oval_btn"
+                        android:paddingLeft="50dp"
+                        android:paddingRight="50dp"
+                        android:shadowColor="#FFFFFF"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Rezolvare interventie"
+                        app:backgroundTint="#417aff"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        />
+
+                </LinearLayout>
 
 
 
