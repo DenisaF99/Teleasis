@@ -44,7 +44,7 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String userId = currentUser.getUid();
         listaInterventii = findViewById(R.id.listInterventii);
-
+        String id_pacient = getIntent().getStringExtra("idPacient");
 
         reff = FirebaseDatabase.getInstance().getReference().child("Conturi/Ingrijitori/").child(userId).child("/Interventii");
         ValueEventListener roomsValueEventListener = new ValueEventListener() {
@@ -52,28 +52,42 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
                 String descriere = "",id= "", stadiu="", tip="",data_rezolvata="";
+                Boolean flag = false;
+                Log.d("caca",id_pacient);
 
                 for (DataSnapshot interventii : dataSnapshot.getChildren()) {
+                    flag = false;
                     if (interventii != null) {
                         for ( DataSnapshot val : interventii.getChildren() ) {
+                            if(val.getKey().equals("data_rezolvata")){
+                                data_rezolvata = val.getValue().toString();
+                            }
                             if(val.getKey().equals("descriere")){
                                 descriere = val.getValue().toString();
                             }
                             if(val.getKey().equals("id_interventie")){
                                 id = val.getValue().toString();
                             }
-                            if(val.getKey().equals("stadiu")){
+                            if(val.getKey().equals("id_pacient")){
+                                if(val.getValue().equals(id_pacient)){
+                                     flag = true;
+                                }
+                                else{
+                                    data_rezolvata ="";
+                                    descriere="";
+                                    id="";
+                                }
+                            }
+                            if(val.getKey().equals("stadiu") && flag){
                                 stadiu = val.getValue().toString();
                             }
-                            if(val.getKey().equals("tip")){
+                            if(val.getKey().equals("tip") && flag){
                                 tip = val.getValue().toString();
                             }
-                            if(val.getKey().equals("data_rezolvata")){
-                                data_rezolvata = val.getValue().toString();
-                            }
-                            if(!descriere.equals("") && !id.equals("") && !stadiu.equals("") && !tip.equals("")){
-                                lista_interventii.add(descriere+","+id+","+stadiu+","+tip+","+data_rezolvata);
 
+                            if(!descriere.equals("") && !id.equals("") && !stadiu.equals("") && !tip.equals("")){
+                                Log.d("caca",descriere+","+id+","+stadiu+","+tip+","+data_rezolvata);
+                                lista_interventii.add(descriere+","+id+","+stadiu+","+tip+","+data_rezolvata);
                                 counter++;
                                 descriere="";
                                 id="";
@@ -107,7 +121,7 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
                     stadii.add(stadiu_int);
                     tipuri.add(tip_int);
 
-                    AdapterListaInterventii customAdapter = new AdapterListaInterventii(descrieri, id_uri, stadii, tipuri, date_rezolvate, getApplicationContext());
+                    AdapterListaInterventii customAdapter = new AdapterListaInterventii(descrieri, id_uri, stadii, tipuri, date_rezolvate, id_pacient, getApplicationContext());
                     customAdapter.notifyDataSetChanged();
                     listaInterventii.setAdapter(customAdapter);
                 }

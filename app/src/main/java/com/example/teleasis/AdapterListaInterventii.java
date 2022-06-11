@@ -20,12 +20,13 @@ public class AdapterListaInterventii extends BaseAdapter {
     ArrayList<String> date_rezolvate = new ArrayList<>();
     Context context;
     LayoutInflater inflter;
-
-    public AdapterListaInterventii(ArrayList<String> descrieri,ArrayList<String> id_uri, ArrayList<String> stadii, ArrayList<String> tipuri, ArrayList<String> date_rezolvate, Context context) {
+    String id_pacient;
+    public AdapterListaInterventii(ArrayList<String> descrieri,ArrayList<String> id_uri, ArrayList<String> stadii, ArrayList<String> tipuri, ArrayList<String> date_rezolvate, String id_pacient, Context context) {
         this.descrieri = descrieri;
         this.id_uri=id_uri;
         this.stadii=stadii;
         this.tipuri=tipuri;
+        this.id_pacient=id_pacient;
         this.date_rezolvate=date_rezolvate;
         this.context = context;
         inflter = (LayoutInflater.from(context));
@@ -82,6 +83,7 @@ public class AdapterListaInterventii extends BaseAdapter {
                 myIntent.putExtra("tip",  tipuri.get(position));
                 myIntent.putExtra("descriere",  descrieri.get(position));
                 myIntent.putExtra("idInterventie",  id_uri.get(position));
+                myIntent.putExtra("idPacient",  id_pacient);
                 context.startActivity(myIntent);
 
             }

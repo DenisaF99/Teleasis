@@ -25,96 +25,106 @@ import java.util.Collections;
 
 public class AlegePacient extends AppCompatActivity {
     DatabaseReference reff;
-    DatabaseReference reffName;
     private FirebaseAuth mAuth;
     TextView no_data;
     ListView listaPacienti;
-    Button alegePacient;
-    @Override
+    String nume="", prenume="";
+    ArrayList<String> lista_nume = new ArrayList<String>();
+    ArrayList<String> lista_NumePacient = new ArrayList<String>();
+    ArrayList<String> lista_PrenumePacient = new ArrayList<String>();
+    ArrayList<String> lista_IdPacient = new ArrayList<String>();
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alege_pacient);
-        ArrayList<String> lista_Id = new ArrayList<String>();
-        ArrayList<String> lista_pacienti = new ArrayList<String>();
-        ArrayList<String> id_uri = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String userId = currentUser.getUid();
         no_data = findViewById(R.id.no_data);
         listaPacienti = findViewById(R.id.listInterventii);
-        String numePacient="";
 
-
-        reff = FirebaseDatabase.getInstance().getReference().child("Conturi/Ingrijitori/").child(userId).child("/Interventii");
+        reff = FirebaseDatabase.getInstance().getReference().child("Conturi/Pacienti/");
         ValueEventListener roomsValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int counter = 0;
-                String  id="";
-                for (DataSnapshot interventii : dataSnapshot.getChildren()) {
-                    if (interventii != null) {
-                        for ( DataSnapshot val : interventii.getChildren() ) {
-                            if(val.getKey().equals("id_pacient")){
-                                id = val.getValue().toString();
-                            }
-                            if(!id.equals("") ){
-                                if (!lista_Id.contains(id))
-                                {
-                                   reffName = FirebaseDatabase.getInstance().getReference().child("Conturi/Pacient/").child(id).child("/DateDemografice");
+                Boolean flag = false;
+                for (DataSnapshot pacienti : dataSnapshot.getChildren()) {
+                    flag = false;
+                    if (pacienti != null) {
+                        for ( DataSnapshot val : pacienti.getChildren() ) {
+                            if(val.getKey().equals("DateDemografice")){
+                                for(DataSnapshot d : val.getChildren()){
+                                    if(d.getKey().equals("id_ingrijitor")){
+                                        if(d.getValue().equals(userId)){
+                                            flag = true;
+                                        }
+                                    }
+                                    if(d.getKey().equals("nume_pacient") && flag){
+                                        nume = d.getValue(String.class);
 
-                                    Log.d("reff", String.valueOf(reffName));
-                                   /* for (DataSnapshot numaPacineti : dataSnapshot.getChildren()) {
-                                    for ( DataSnapshot nume : numaPacineti.getChildren() ) {
-                                        if(nume.getKey().equals("nume_pacient")){
-                                            numePacient = val.getValue().toString();
-                                        }; */
-                                    lista_Id.add(id);
-                                    //lista_pacienti.add();
-                                //Log.d("id", "added");
-                                //Log.d("id", id);
-                                counter++;
-                                id=""; }
+                                    }
+                                    if(d.getKey().equals("prenume_pacient") && flag){
+                                        prenume = d.getValue(String.class);
 
+                                    }
+                                    if(!nume.equals("") && !prenume.equals(""))
+                                    {
+                                        lista_nume.add(nume+","+prenume+","+pacienti.getKey());
+                                        nume="";
+                                        prenume="";
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                Collections.sort(lista_Id);
 
 
-                AdapterListaPacienti customAdapter = new AdapterListaPacienti(lista_Id, getApplicationContext());
-                customAdapter.notifyDataSetChanged();
-                listaPacienti.setAdapter(customAdapter);
+                Collections.sort(lista_nume);
+
+                for(String c : lista_nume){
+                    String[] sp = c.split(",");
+                    String nume = sp[0];
+                    String prenume = sp[1];
+                    String id_pacient = sp[2];
+                    lista_NumePacient.add(nume);
+                    lista_PrenumePacient.add(prenume);
+                    lista_IdPacient.add(id_pacient);
+
+                    AdapterListaPacienti customAdapter = new AdapterListaPacienti(lista_NumePacient,lista_PrenumePacient,lista_IdPacient, getApplicationContext());
+                    customAdapter.notifyDataSetChanged();
+                    listaPacienti.setAdapter(customAdapter);
+                }
+
 
                 listaPacienti.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d("lista",lista_Id.get(position));
                         Intent myIntent = new Intent(AlegePacient.this, PrimaPagina_Ingrijitor.class);
-                        myIntent.putExtra("idPacient",lista_Id.get(position));
+                        myIntent.putExtra("numePacient",lista_NumePacient.get(position));
+                        myIntent.putExtra("prenumePacient",lista_PrenumePacient.get(position));
+                        myIntent.putExtra("idPacient",lista_IdPacient.get(position));
                         startActivity(myIntent);
                     }
                 });
 
             }
+
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         };
+
+
+
         reff.addListenerForSingleValueEvent(roomsValueEventListener);
 
 
 
-       /* alegePacient = findViewById(R.id.alegePacientBtn);
 
-        alegePacient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(AlegePacient.this, PrimaPagina_Ingrijitor.class);
-                startActivity(myIntent);
-            }
-        }); */
 
 
     }

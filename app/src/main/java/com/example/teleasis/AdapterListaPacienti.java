@@ -13,26 +13,25 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class AdapterListaPacienti extends BaseAdapter {
-    ArrayList<String> lista_interventii = new ArrayList<String>();
+    ArrayList<String> nume = new ArrayList<>();
+    ArrayList<String> prenume = new ArrayList<>();
     ArrayList<String> id_uri = new ArrayList<>();
     Context context;
     LayoutInflater inflter;
 
-    public AdapterListaPacienti(ArrayList<String> id_uri, Context context) {
+    public AdapterListaPacienti(ArrayList<String> nume,ArrayList<String> prenume,ArrayList<String> id_uri, Context context) {
+        this.nume=nume;
+        this.prenume=prenume;
         this.id_uri=id_uri;
+        this.context = context;
         inflter = (LayoutInflater.from(context));
         this.notifyDataSetChanged();
     }
 
 
-    /*@Override
-    public Object getItem(int pos) {
-        return descrieri.get(pos);
-    } */
-
     @Override
     public int getCount() {
-        return id_uri.size();
+        return nume.size();
     }
 
     @Override
@@ -49,10 +48,9 @@ public class AdapterListaPacienti extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         this.notifyDataSetChanged();
         view = inflter.inflate(R.layout.activity_adapter_alege_pacient, parent, false);
-        Log.d("View","1653");
         //Handle TextView and display string from your list
         TextView tvContact= (TextView)view.findViewById(R.id.numePacient);
-        tvContact.setText(id_uri.get(position));
+        tvContact.setText(nume.get(position)+" "+prenume.get(position));
 
         //Handle buttons and add onClickListeners
        // TextView interventie = (TextView) view.findViewById(R.id.numePacientt);
