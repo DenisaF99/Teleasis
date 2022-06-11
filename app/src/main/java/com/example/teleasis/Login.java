@@ -60,8 +60,6 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-
-
                 fAuth.signInWithEmailAndPassword(mail,parolaLogIn).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -70,7 +68,7 @@ public class Login extends AppCompatActivity {
                                 Intent myIntent = new Intent(Login.this, PrimaPagina_Pacient.class);
                                 startActivity(myIntent);
                             }else if(item.equals("ingrijitor")){
-                                Intent myIntent = new Intent(Login.this, PrimaPagina_Ingrijitor.class);
+                                Intent myIntent = new Intent(Login.this, AlegePacient.class);
                                 startActivity(myIntent);
                             }
                             //Toast.makeText(Login.this,"User created", Toast.LENGTH_SHORT).show();
