@@ -91,7 +91,7 @@ public class PreluareValoriMediu extends AppCompatActivity {
                 bdValori.setId(id);
                 reff.child("Conturi").child("Pacienti").child(userId).child("ValoriMediu").child(String.valueOf(id)).setValue(bdValori);
 
-                Toast.makeText(PreluareValoriMediu.this, "Data inserted successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(PreluareValoriMediu.this, "Date introduse cu succes!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -284,7 +284,7 @@ public class PreluareValoriMediu extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-            progressDialog = ProgressDialog.show(PreluareValoriMediu.this, "Hold on", "Connecting");
+            progressDialog = ProgressDialog.show(PreluareValoriMediu.this, "Asteptati", "Connecting");
 
         }
 

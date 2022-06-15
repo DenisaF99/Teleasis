@@ -62,6 +62,8 @@ public class PreluarePuls extends AppCompatActivity {
     int contor5060, contor6070, contor7080, contor8090, contor90100, contor100110, contor110120, contor120130, contor130140;
     int puls_final = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,28 +108,35 @@ public class PreluarePuls extends AppCompatActivity {
         graph.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#000000"));
         graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#000000"));
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        String idParameter = getIntent().getStringExtra("idPacient");
+        Log.d("idParam", idParameter);
 
 
         buttonbd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
                 Random random = new Random();
                 int id = random.nextInt(100000);
                 bdpuls.setValue(String.valueOf(puls_final));
                 bdpuls.setData(date);
                 bdpuls.setId(id);
+                if(!idParameter.equals("-1")){
+                    reff.child("Conturi").child("Pacienti").child(idParameter).child("ValoriPuls").child(String.valueOf(id)).setValue(bdpuls);
+                    Toast.makeText(PreluarePuls.this, "Date introduse cu succes!", Toast.LENGTH_LONG).show();
+                }
+                else{
                 Log.d("userID", userId);
                 reff.child("Conturi").child("Pacienti").child(userId).child("ValoriPuls").child(String.valueOf(id)).setValue(bdpuls);
+                    Toast.makeText(PreluarePuls.this, "Date introduse cu succes", Toast.LENGTH_LONG).show();
+                }
 
-                Toast.makeText(PreluarePuls.this, "Data inserted successfully", Toast.LENGTH_LONG).show();
+
             }
         });
 
-
     }
-
     private final BroadcastReceiver mPairingRequestReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -390,7 +399,7 @@ public class PreluarePuls extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-            progressDialog = ProgressDialog.show(PreluarePuls.this, "Hold on", "Connecting");
+            progressDialog = ProgressDialog.show(PreluarePuls.this, "Asteptati", "Connecting");
 
         }
 

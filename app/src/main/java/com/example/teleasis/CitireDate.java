@@ -125,6 +125,7 @@ public class CitireDate extends AppCompatActivity {
                 myIntent.putExtra(DEVICE_EXTRA, device);
                 myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
                 myIntent.putExtra(BUFFER_SIZE, mBufferSize);
+                myIntent.putExtra("idPacient","-1");
                 startActivity(myIntent);
 
             }

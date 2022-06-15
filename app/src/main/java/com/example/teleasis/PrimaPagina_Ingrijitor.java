@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,9 @@ public class PrimaPagina_Ingrijitor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(PrimaPagina_Ingrijitor.this, IntroducereDate_ingrijitor.class);
+                myIntent.putExtra("numePacient",nume);
+                myIntent.putExtra("prenumePacient",prenume);
+                myIntent.putExtra("idPacient",id_uri);
                 startActivity(myIntent);
             }
         });

@@ -65,6 +65,10 @@ public class IntroducereDate_ingrijitor extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lista_bluetooth);
         IntentFilter filter = new IntentFilter();
 
+        String nume = getIntent().getStringExtra("numePacient");
+        String prenume = getIntent().getStringExtra("prenumePacient");
+        String id_uri = getIntent().getStringExtra("idPacient");
+
         Log.d("FoundVal:", String.valueOf(foundConn));
 
         filter.addAction(BluetoothDevice.ACTION_FOUND);
@@ -127,6 +131,10 @@ public class IntroducereDate_ingrijitor extends AppCompatActivity {
                 myIntent.putExtra(DEVICE_EXTRA, device);
                 myIntent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
                 myIntent.putExtra(BUFFER_SIZE, mBufferSize);
+                myIntent.putExtra("numePacient",nume);
+                myIntent.putExtra("prenumePacient",prenume);
+                myIntent.putExtra("idPacient",id_uri);
+                Log.d("IdPacient",id_uri);
                 startActivity(myIntent);
 
             }

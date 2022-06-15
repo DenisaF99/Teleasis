@@ -91,11 +91,10 @@ public class AlegePacient extends AppCompatActivity {
                     lista_NumePacient.add(nume);
                     lista_PrenumePacient.add(prenume);
                     lista_IdPacient.add(id_pacient);
-
-                    AdapterListaPacienti customAdapter = new AdapterListaPacienti(lista_NumePacient,lista_PrenumePacient,lista_IdPacient, getApplicationContext());
-                    customAdapter.notifyDataSetChanged();
-                    listaPacienti.setAdapter(customAdapter);
                 }
+                AdapterListaPacienti customAdapter = new AdapterListaPacienti(lista_NumePacient,lista_PrenumePacient,lista_IdPacient, getApplicationContext());
+                customAdapter.notifyDataSetChanged();
+                listaPacienti.setAdapter(customAdapter);
 
 
                 listaPacienti.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,13 +118,7 @@ public class AlegePacient extends AppCompatActivity {
         };
 
 
-
         reff.addListenerForSingleValueEvent(roomsValueEventListener);
-
-
-
-
-
 
     }
 }

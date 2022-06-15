@@ -111,12 +111,14 @@ public class VizualizareDatePacient extends AppCompatActivity {
                 for (String puls_curent:lista_puls) {
                     String[] sp = puls_curent.split(",");
                     String valoare = sp[1];
-                    String[] data = sp[0].split("-");
+                    String[] str = sp[0].split(" ");
+                    Log.d("Split", str[1]);
+                    String[] data= str[0].split("-");
                     String id = sp[2];
                     String an = data[2];
                     String luna = data[1];
                     String zi = data[0];
-                    String data_invers = an + "-" + luna + "-" + zi;
+                    String data_invers = an + "-" + luna + "-" + zi+" "+ str[1];
                     date.add(data_invers);
                     valori.add(valoare);
                     iduri.add(id);
