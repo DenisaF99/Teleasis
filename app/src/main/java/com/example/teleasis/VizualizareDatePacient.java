@@ -1,6 +1,7 @@
 package com.example.teleasis;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -30,7 +31,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.tensorflow.lite.Interpreter;
 import java.io.Console;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,6 +49,7 @@ public class VizualizareDatePacient extends AppCompatActivity {
     DatabaseReference reff2;
     LinearLayout layoutPuls, layoutMediu;
     private FirebaseAuth mAuth;
+    Interpreter interpreter;
 
     ArrayList<String> lista_puls = new ArrayList<String>();
     ArrayList<String> date = new ArrayList<>();
@@ -56,6 +63,7 @@ public class VizualizareDatePacient extends AppCompatActivity {
     ArrayList<String> valori_prezenta = new ArrayList<>();
     ArrayList<String> valori_umiditate = new ArrayList<>();
     ArrayList<String> iduri_mediu = new ArrayList<>();
+    ArrayList<String> preziceri_puls = new ArrayList<>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,14 @@ public class VizualizareDatePacient extends AppCompatActivity {
         layoutPuls = findViewById(R.id.linearLayoutPuls);
         no_data = findViewById(R.id.no_data);
 
+        try {
+            interpreter = new Interpreter(loadModelFile(),null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String userId = currentUser.getUid();
@@ -84,6 +100,7 @@ public class VizualizareDatePacient extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
                 String data_luata = "",valoare_luata= "";
+                int f = 0;
 
                 for (DataSnapshot pulsuri : dataSnapshot.getChildren()) {
                     if (pulsuri != null) {
@@ -93,9 +110,10 @@ public class VizualizareDatePacient extends AppCompatActivity {
                             }
                             if(val.getKey().equals("value")){
                                 valoare_luata = val.getValue().toString();
+                                f = (int) doInference(String.valueOf(valoare_luata));
                             }
                             if(!data_luata.equals("") && !valoare_luata.equals("")){
-                                lista_puls.add(data_luata+","+valoare_luata + "," + pulsuri.getKey());
+                                lista_puls.add(data_luata+","+valoare_luata + "," + pulsuri.getKey() + "," + f);
                                 counter++;
                                 data_luata="";
                                 valoare_luata="";
@@ -112,17 +130,21 @@ public class VizualizareDatePacient extends AppCompatActivity {
                     String[] sp = puls_curent.split(",");
                     String valoare = sp[1];
                     String[] str = sp[0].split(" ");
-                    Log.d("Split", str[1]);
                     String[] data= str[0].split("-");
                     String id = sp[2];
                     String an = data[2];
                     String luna = data[1];
                     String zi = data[0];
                     String data_invers = an + "-" + luna + "-" + zi+" "+ str[1];
+
+                    String ff = sp[3];
+
+                    preziceri_puls.add(ff);
+
                     date.add(data_invers);
                     valori.add(valoare);
                     iduri.add(id);
-                    CustomAdapterVizualizare customAdapter = new CustomAdapterVizualizare(getApplicationContext(), valori, date,iduri);
+                    CustomAdapterVizualizare customAdapter = new CustomAdapterVizualizare(getApplicationContext(), valori, date,iduri, preziceri_puls);
                     customAdapter.notifyDataSetChanged();
                     listValoriPuls.setAdapter(customAdapter);
                 }
@@ -192,7 +214,6 @@ public class VizualizareDatePacient extends AppCompatActivity {
                     valori_umiditate.add(valoare_umiditate);
                     valori_prezenta.add(valoare_prezenta);
                     iduri_mediu.add(id);
-                    Log.d("caca", valoare_gaz);
                     CustomAdapterVizualizareMediu customAdapter2 = new CustomAdapterVizualizareMediu(getApplicationContext(), valori_gaz,valori_temperatura,valori_umiditate,valori_prezenta, date_mediu,iduri_mediu);
                     customAdapter2.notifyDataSetChanged();
                     listValoriMediu.setAdapter(customAdapter2);
@@ -224,4 +245,22 @@ public class VizualizareDatePacient extends AppCompatActivity {
 
     }
 
+    private MappedByteBuffer loadModelFile() throws  IOException{
+        AssetFileDescriptor assetFileDescriptor = this.getAssets().openFd("linear3.tflite");
+        FileInputStream fileInputStream = new FileInputStream(assetFileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = fileInputStream.getChannel();
+        long startOffset = assetFileDescriptor.getStartOffset();
+        long length = assetFileDescriptor.getLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY,startOffset,length);
+    }
+
+    public float doInference(String val){
+        float[] input = new float[1];
+        input[0] = Float.parseFloat(val);
+        float[][] output = new float[1][1];
+        interpreter.run(input,output);
+        return output[0][0];
+    }
+
 }
+

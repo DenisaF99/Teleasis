@@ -85,7 +85,14 @@
                         android:gravity="center"
                         android:layout_height="wrap_content"
                         android:text="Valoarea" />
-
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="Prezicere" />
                 </LinearLayout>
 
                 <ListView

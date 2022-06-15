@@ -53,7 +53,6 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
                 int counter = 0;
                 String descriere = "",id= "", stadiu="", tip="",data_rezolvata="";
                 Boolean flag = false;
-                Log.d("caca",id_pacient);
 
                 for (DataSnapshot interventii : dataSnapshot.getChildren()) {
                     flag = false;
@@ -86,7 +85,6 @@ public class RezolvareInterventii_ingrijitor extends AppCompatActivity {
                             }
 
                             if(!descriere.equals("") && !id.equals("") && !stadiu.equals("") && !tip.equals("")){
-                                Log.d("caca",descriere+","+id+","+stadiu+","+tip+","+data_rezolvata);
                                 lista_interventii.add(descriere+","+id+","+stadiu+","+tip+","+data_rezolvata);
                                 counter++;
                                 descriere="";
